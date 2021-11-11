@@ -1,0 +1,117 @@
+.inicio{
+     /*background-image: url("../images/fondo otono.jpg");*/
+    background-image: url("../images/fondo otono2.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #ef8997;
+}
+.fondo{
+     /*background-image: url(".../images/fondo otono.jpg");*/
+    background-image: url("../images/fondo otono2.png");
+    background-size:100%;
+    /*z-index: -200;*/
+}
+
+.buscar{
+    background-image: linear-gradient(#fbb4cfa1 40%, #f8b464 100%);
+    color: black;
+    /*padding: 20px;*/
+    border-radius: 5px;
+}
+     
+   h1{
+       font-size: 45px;
+       color: #ff26b5;
+       margin-top: auto;
+       -webkit-text-stroke: 1.5px #000000;
+   }
+   h3{
+       /*font-size:xx-large;*/
+       color: #ff26b5;
+       margin-top: 20px;
+       -webkit-text-stroke: 1.5px #000000;
+   }
+.ui-datatable thead th, .ui-datatable tfoot td {
+    text-align: center;
+    padding: 1px 1px;
+    margin-right: auto;
+    /*font-size: 0.4em;*/
+}
+.ui-clock {
+    padding: 34px;
+    display: contents;
+    font-size: 25px;
+    text-align: left;
+    -webkit-text-stroke: 1px #000000;
+}
+ .ui-widget-header {
+    border: none;
+    background: none;
+    background-color: #ffad42;
+    color: #ffdd05;
+    font-weight: bold;
+/* -webkit-text-stroke: 1px #000000;*/}
+ 
+   .bottom{
+       background-image: linear-gradient(#fbb4cf85 40%, #ffcc33db 100%);
+       background-repeat: repeat-x;
+       z-index: 50;
+   }
+/*   .ui-button-text-only .ui-button-text {
+     padding: auto; 
+}*/
+/*.ui-contentflow .flow {
+    position: relative;
+    z-index: 0;
+    visibility: hidden;
+    width: 100%;
+    margin: 0 auto;
+    background: none;
+}*/
+.ui-widget-content {
+    border: none;
+    background: none;
+    color: black;
+    background-color: #f3ab00ba;
+}
+.ui-contentflow .globalCaption {
+    text-align: center;
+    font-weight: bold;
+    color: #ffcc3305;
+/*    color: #ffcc33;*/
+    font-size: 34px;
+    height: 20px;
+    margin: 2em auto;
+/*    -webkit-text-stroke: 1.1px #000000;*/
+}
+
+.ui-button {
+    display: inline-block;
+    border-radius: 5px;
+    position: revert;
+    margin-right: 1em;
+    text-decoration: none!important;
+    cursor: pointer;
+    text-align: center;
+    overflow: visible;
+    font-size: xx-large;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: black;
+    background-color: white;
+    background: #ffe333;
+    font-weight: bold;
+    color: #ee77d7;
+}
+
+
+
+
+
+
+
+
+

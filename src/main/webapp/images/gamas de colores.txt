@@ -1,0 +1,14 @@
+COLORES
+rosa claro #fbb4cf
+amarillo chllon #fff100c2
+naraaanja vida #f36200
+fucsia #ff26b5++
+negro #000000
+naranja claro #ffcc33
+rosa viejo #f4d3da
+amaarillo verdoso #edf51a
+naranja fuego #f46f27
+fucsiaa oscuro #e0219e
+fucsiaa lavado #fca4d7
+amarillo apagado(fondo) #fefec3
+BLANCO #ffffff

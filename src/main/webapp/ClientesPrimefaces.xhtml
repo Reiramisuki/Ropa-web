@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="es">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html;
+              charset=utf-8" />
+        <title>Sistema Ropa Web</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    </h:head>
+    <h:body class="fondo">
+
+        
+        <p:growl id="growl" showDetail="true"/>
+        <div>
+            <p:button value="Inicio" styleClass="rounded-button"  style="padding:auto ;font-size: 1.1em;  border-radius: 5em;"  href ="index.xhtml"/>
+            <p:button value= "Clientes" styleClass="rounded-button"  style="padding:auto;font-size: 1.1em;  border-radius: 5em;" href ="ClientesPrimefaces.xhtml"/>
+            <p:button value="Articulos" styleClass="rounded-button"  style="padding:auto;font-size: 1.1em;  border-radius: 5em;" href ="ArticulosPrimefaces.xhtml"/>     
+        </div>
+        <h3 style="text-align: center ; font-size: 70px; margin: 20px 40px">~Clientes~</h3>
+
+        <h:form id="form">
+            <div class=" buscar">
+                <p:outputPanel>
+                    <h:panelGrid columns="7" cellpadding="12px">
+                        <p:outputLabel  value="Buscar" style="padding:auto;font-size: 1.3em;width: 110px; height: 50px;"/>
+                        <p:outputLabel value="Apellido: " style="padding:auto;font-size: 1.3em;width: 110px; height: 50px;"/>
+                        <p:inputText value="#{clienteMB.buscarApellido}"/>
+                        <p:outputLabel value="N° de documento:  " style="padding:auto;font-size: 1.3em;width: 110px; height: 50px;"/>
+                        <p:inputText value="#{clienteMB.buscarNumeroDocumento}"/>
+                        <p:commandButton value="Buscar" update="dt-clients"  styleClass="ui-button-success" style="padding:auto ;text-align:center  ;font-size: 1.1em ;width: 120px; height: 50px;  border-radius: 5px;"/>
+                        <p:commandButton value="Nuevo"  style="padding:auto ;text-align:center;width: 120px; height: 50px; border-radius: 5px; font-size: 1.1em" actionListener="#{clienteMB.openNew}"
+                                         update=":form:manage-client-content" oncomplete="PF('manageClientDialog').show()"
+                                         styleClass="ui-button-success" >
+                            <p:resetInput target=":form:manage-client-content"/>
+                        </p:commandButton>       
+                    </h:panelGrid>
+                </p:outputPanel> 
+            </div>
+            <p:dataTable id="dt-clients" 
+                         widgetVar="dtClients" 
+                         var="cliente" 
+                         value="#{clienteMB.likeDocumenoYApellido}"
+                         reflow="true" 
+                         styleClass="products-table"
+                         selectionMode="single"
+                         selection="#{clienteMB.cliente}" 
+                         rowKey="#{cliente.id}" 
+                         paginator="true"
+                         rows="10" 
+                         paginatorPosition="bottom"
+                         rowSelectMode="add"
+                         sortBy="#{cliente.id}"
+                         >
+
+                <p:column headerText="Id" style="text-align: center">
+                    <p:outputLabel value="#{cliente.id}"/>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <p:outputLabel value="#{cliente.nombre}"/>
+                </p:column>
+                <p:column headerText="Apellido">
+                    <p:outputLabel value="#{cliente.apellido}"/>
+                </p:column>
+                <p:column headerText="Edad" style="text-align: center; width: 70px">
+                    <p:outputLabel value="#{cliente.edad}"/>
+                </p:column>
+                <p:column headerText="Dirección">
+                    <p:outputLabel value="#{cliente.direccion}"/>
+                </p:column>
+                <p:column headerText="Email" style="width: 208px">
+                    <p:outputLabel value="#{cliente.email}"/>               
+                </p:column>
+                <p:column headerText="Teléfono">
+                    <p:outputLabel value="#{cliente.telefono}"/>
+                </p:column>
+                <p:column headerText="Tipo documento" style="text-align: center;">
+                    <p:outputLabel value="#{cliente.tipoDocumento}"/>
+                </p:column>
+                <p:column headerText="Nº documento" style="text-align: center;">
+                    <p:outputLabel value="#{cliente.numeroDocumento}"/>
+                </p:column>
+                
+                <p:column headerText="Acción" style="text-align: center; padding: 0px;">
+                    <p:commandButton value="✏️"  update=":form:manage-client-content dt-clients" 
+                                     oncomplete="PF('manageClientDialog').show()"
+                                     styleClass="edit-button rounded-button ui-button-success" process="@this">
+                        <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
+                        <p:resetInput target=":form:manage-client-content"/>
+                    </p:commandButton>
+                    
+                    <p:commandButton value="🗑️" class="ui-button-warning rounded-button"  process="@this"
+                                     oncomplete="PF('deleteClientDialog').show()"  >
+                        <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
+                    </p:commandButton>
+                </p:column>
+                
+            </p:dataTable>
+
+            <p:dialog header="Detalles del cliente" showEffect="fade" modal="true"
+                      widgetVar="manageClientDialog" responsive="true">
+                <p:outputPanel id="manage-client-content" class="ui-fluid">
+                    <p:outputPanel rendered="#{not empty clienteMB.cliente}">
+                        <h:panelGrid columns="4"
+                                     cellpadding="2"
+                                     class="izq"
+                                     >
+                          
+                                <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                                <p:inputText id="nombre" value="#{clienteMB.cliente.nombre}" required="true"/>
+                          
+                                <p:outputLabel for="apellido">Apellido</p:outputLabel>
+                                <p:inputText id="apellido" value="#{clienteMB.cliente.apellido}" required="true"/>
+                           
+                                <p:outputLabel for="edad">Edad</p:outputLabel>
+                                <p:inputText id="edad" value="#{clienteMB.cliente.edad}"/>
+                          
+                                <p:outputLabel for="direccion">Dirección</p:outputLabel>
+                                <p:inputTextarea id="direccion" value="#{clienteMB.cliente.direccion}"/>
+                            
+                                <p:outputLabel for="email">Email</p:outputLabel>
+                                <p:inputTextarea id="email" value="#{clienteMB.cliente.email}"/>
+                           
+                                <p:outputLabel for="telefono">Teléfono</p:outputLabel>
+                                <p:inputText id="telefono" value="#{clienteMB.cliente.telefono}"/>
+                           
+                                <p:outputLabel>Tipo de documento</p:outputLabel>
+                                <p:selectOneMenu value="#{clienteMB.cliente.tipoDocumento}">
+                                    <f:selectItems value="#{tipoDocumentoMB.tipoDocumento}"/>
+                                </p:selectOneMenu>
+                           
+                                <p:outputLabel for="numeroDocumento">Número de documento</p:outputLabel>
+                                <p:inputText id="numeroDocumento" value="#{clienteMB.cliente.numeroDocumento}" required="true"/>
+                          
+                        </h:panelGrid>
+                    </p:outputPanel>
+
+                </p:outputPanel>
+
+                <f:facet name="footer">   
+                    <p:outputPanel class="centered">
+                        <p:commandButton value="Guardar"  actionListener="#{clienteMB.guardar}"
+                                         update="manage-client-content :growl" process="manage-client-content @this" oncomplete="PF('manageClientDialog').hide()"/>
+                        <p:commandButton value="Cancelar"  onclick="PF('manageClientDialog').hide()"
+                                         class="ui-button-secondary"/>
+                    </p:outputPanel>
+                </f:facet>
+
+            </p:dialog>
+
+            <p:confirmDialog widgetVar="deleteClientDialog" showEffect="fade" width="300"
+                             message="¿Está seguro de borrar este cliente?" header="Confirm" severity="warn">
+                <p:outputPanel class="centered">
+                    <p:commandButton value="Si" icon="pi pi-check" 
+                                     actionListener="#{clienteMB.remove}"
+                                     update=":growl"
+                                     process="@this" oncomplete="PF('deleteClientDialog').hide()"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                     onclick="PF('deleteClientDialog').hide()"/>
+                </p:outputPanel>
+            </p:confirmDialog>
+        </h:form>
+    </h:body>
+</html>
+
+
